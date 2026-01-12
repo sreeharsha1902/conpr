@@ -13,6 +13,11 @@ export default defineConfig({
       '@opensource-showcase/react': path.resolve(__dirname, 'packages/react/src/index.tsx'),
     },
   },
+  optimize: {
+    esbuildOptions: {
+      target: 'ES2020',
+    },
+  },
   server: {
     port: 3000,
     open: true,
