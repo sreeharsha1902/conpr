@@ -35,6 +35,7 @@ jobs:
 
       - name: Build Vite app
         run: npx vite build
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
