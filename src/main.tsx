@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
-// Import from Vite alias
-import { ContributionShowcase } from '@conpr/react';
+// Import from published npm package (when available locally via workspaces)
+import { ContributionShowcase } from '@opensource-showcase/react';
 import '../packages/react/src/styles.css';
 
 function App() {
