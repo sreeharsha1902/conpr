@@ -129,21 +129,28 @@ export async function getUserPullRequests(
       { headers }
     );
     
-    return response.data.items.map((pr: any) => ({
-      id: pr.id,
-      title: pr.title,
-      number: pr.number,
-      url: pr.html_url,
-      state: pr.state === 'closed' && pr.pull_request?.merged_at ? 'merged' : pr.state,
-      createdAt: pr.created_at,
-      mergedAt: pr.pull_request?.merged_at,
-      repository: {
-        name: pr.repository_url.split('/').pop(),
-        owner: pr.repository_url.split('/')[4],
-      },
-      additions: 0,
-      deletions: 0,
-    }));
+    return response.data.map((pr: any) => {
+      const stateMap: { open: string; closed: string; merged: string } = {
+        open: 'open',
+        closed: pr.pull_request?.merged_at ? 'merged' : 'closed',
+        merged: 'merged',
+      };
+      return {
+        id: pr.id,
+        title: pr.title,
+        number: pr.number,
+        url: pr.html_url,
+        state: stateMap[pr.state as keyof typeof stateMap] || pr.state,
+        createdAt: pr.created_at,
+        mergedAt: pr.pull_request?.merged_at,
+        repository: {
+          name: pr.repository_url.split('/').pop(),
+          owner: pr.repository_url.split('/')[4],
+        },
+        additions: 0,
+        deletions: 0,
+      };
+    })
   } catch (error) {
     throw new Error(`Failed to fetch pull requests for user: ${username}`);
   }

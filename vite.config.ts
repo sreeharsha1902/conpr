@@ -6,8 +6,10 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@conpr/react': path.resolve(__dirname, 'packages/react/src'),
-      '@conpr/core': path.resolve(__dirname, 'packages/core/src'),
+      '@conpr/react': path.resolve(__dirname, 'packages/react'),
+      '@conpr/core': path.resolve(__dirname, 'packages/core'),
+      '@opensource-showcase/core': path.resolve(__dirname, 'packages/core'),
+      '@opensource-showcase/react': path.resolve(__dirname, 'packages/react'),
     },
   },
   server: {

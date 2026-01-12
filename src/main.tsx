@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
-// Import from the TypeScript source (Vite will handle compilation)
-import { ContributionShowcase } from '@conpr/react';
-import '@conpr/react/styles.css';
+// Import directly from source for Vite development
+import { ContributionShowcase } from '../packages/react/src/index';
+import '../packages/react/src/styles.css';
 
 function App() {
   const [username, setUsername] = useState('sreeharsha1902');
