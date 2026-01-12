@@ -126,36 +126,40 @@ export async function getUserPullRequests(
   const headers = getAuthHeaders(token);
   
   try {
-    // Fetch merged pull requests
+    // Fetch merged pull requests using search API
     const response = await axios.get(
       `${GITHUB_API_URL}/search/issues?q=type:pr+author:${username}&per_page=100&sort=updated`,
       { headers }
     );
     
-    return response.data.map((pr: any) => {
-      const stateMap: Record<string, 'open' | 'closed' | 'merged'> = {
-        open: 'open',
-        closed: pr.pull_request?.merged_at ? 'merged' : 'closed',
-        merged: 'merged',
-      };
+    // Search API returns items array, not direct data
+    const items = response.data.items || [];
+    
+    return items.map((pr: any) => {
+      // Parse repository info from the URL
+      const urlParts = pr.repository_url.split('/');
+      
       return {
         id: pr.id,
         title: pr.title,
         number: pr.number,
         url: pr.html_url,
-        state: stateMap[pr.state] || ('closed' as const),
+        state: pr.state === 'closed' ? 'closed' : 'open',
         createdAt: pr.created_at,
-        mergedAt: pr.pull_request?.merged_at,
+        mergedAt: pr.merged_at,
         repository: {
-          name: pr.repository_url.split('/').pop(),
-          owner: pr.repository_url.split('/')[4],
+          name: urlParts[urlParts.length - 1],
+          owner: urlParts[urlParts.length - 2],
         },
         additions: 0,
         deletions: 0,
       };
-    })
-  } catch (error) {
-    throw new Error(`Failed to fetch pull requests for user: ${username}`);
+    });
+  } catch (error: any) {
+    const msg = error?.response?.status === 422 
+      ? `Unable to search PRs for user: ${username}. You may have hit the API rate limit.`
+      : error?.message || `Failed to fetch pull requests for user: ${username}`;
+    throw new Error(msg);
   }
 }
 
@@ -199,12 +203,19 @@ export async function getContributionSummary(
   username: string,
   token?: string
 ): Promise<ContributionSummary> {
-  const [user, repositories, pullRequests, contributions] = await Promise.all([
-    getGitHubUser(username, token),
+  // Fetch user first - it's the most critical
+  const user = await getGitHubUser(username, token);
+  
+  // Fetch other data in parallel, but don't fail if some requests fail
+  const results = await Promise.allSettled([
     getUserRepositories(username, token),
     getUserPullRequests(username, token),
     getUserContributions(username, token),
   ]);
+  
+  const repositories = results[0].status === 'fulfilled' ? results[0].value : [];
+  const pullRequests = results[1].status === 'fulfilled' ? results[1].value : [];
+  const contributions = results[2].status === 'fulfilled' ? results[2].value : [];
   
   return {
     user,
