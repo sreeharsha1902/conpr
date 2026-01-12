@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
 // Import from published npm package (when available locally via workspaces)
-import { ContributionShowcase } from '@sreeharsha1902/react';
+import { ContributionShowcase } from '@opensource-showcase/react';
 import '../packages/react/src/styles.css';
 
 function App() {

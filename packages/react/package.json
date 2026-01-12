@@ -1,5 +1,5 @@
 {
-  "name": "@opensource-showcase/react",
+  "name": "@sreeharsha1902/react",
   "version": "0.1.0",
   "description": "React components for displaying open-source contributions",
   "main": "dist/index.js",
@@ -35,7 +35,7 @@
     "react-dom": "^18.0.0"
   },
   "dependencies": {
-    "@opensource-showcase/core": "*"
+    "@sreeharsha1902/core": "*"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

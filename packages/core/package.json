@@ -1,5 +1,5 @@
 {
-  "name": "@opensource-showcase/core",
+  "name": "@sreeharsha1902/core",
   "version": "0.1.0",
   "description": "Core utilities for fetching and processing GitHub contribution data",
   "main": "dist/index.js",
