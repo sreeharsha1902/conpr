@@ -8,9 +8,6 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
 
     steps:
       - name: Checkout code
@@ -29,7 +26,10 @@ jobs:
       - name: Build packages
         run: npm run build:packages
 
-      - name: Publish to npm
-        run: npm publish -w packages/core && npm publish -w packages/react
+      - name: Publish core package
+        run: cd packages/core && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish react package
+        run: cd packages/react && npm publish --access public
