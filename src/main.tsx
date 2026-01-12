@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-
-// Import from published npm packages (installed in node_modules)
 import { ContributionShowcase } from '@openpr/react';
-import '../packages/react/src/styles.css';
 
-function App() {
-  const [username, setUsername] = useState('sreeharsha1902');
-  const [inputValue, setInputValue] = useState('sreeharsha1902');
-  const [token, setToken] = useState('');
+// Simple app component
+const App: React.FC = () => {
+  const [username, setUsername] = React.useState('sreeharsha1902');
+  const [inputValue, setInputValue] = React.useState('sreeharsha1902');
+  const [token, setToken] = React.useState('');
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,22 +72,20 @@ function App() {
           </div>
 
           <div style={{ marginTop: '1rem', fontSize: '0.9rem', color: '#666' }}>
-            <label>
-              <input
-                type="password"
-                value={token}
-                onChange={(e) => setToken(e.target.value)}
-                placeholder="GitHub Token (optional for higher rate limits)"
-                style={{
-                  padding: '0.5rem 0.75rem',
-                  fontSize: '0.9rem',
-                  width: '300px',
-                  maxWidth: '100%',
-                  border: '1px solid #ddd',
-                  borderRadius: '6px',
-                }}
-              />
-            </label>
+            <input
+              type="password"
+              value={token}
+              onChange={(e) => setToken(e.target.value)}
+              placeholder="GitHub Token (optional for higher rate limits)"
+              style={{
+                padding: '0.5rem 0.75rem',
+                fontSize: '0.9rem',
+                width: '300px',
+                maxWidth: '100%',
+                border: '1px solid #ddd',
+                borderRadius: '6px',
+              }}
+            />
             <p style={{ marginTop: '0.5rem', fontSize: '0.85rem' }}>
               Get a token at{' '}
               <a href="https://github.com/settings/tokens" target="_blank" rel="noopener noreferrer">
@@ -119,9 +115,15 @@ function App() {
       </footer>
     </div>
   );
+};
+
+// Mount the app
+const root = document.getElementById('root');
+if (!root) {
+  throw new Error('Root element not found');
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(root).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>

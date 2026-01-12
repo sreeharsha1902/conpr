@@ -15,4 +15,7 @@ export default defineConfig({
     port: 3000,
     open: true,
   },
+  optimizeDeps: {
+    exclude: ['@openpr/react', '@openpr/core'],
+  },
 });
