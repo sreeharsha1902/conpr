@@ -1,0 +1,43 @@
+{
+  "name": "@opensource-showcase/monorepo",
+  "version": "0.1.0",
+  "description": "TypeScript monorepo for showcasing open-source contributions with React components and Node.js utilities",
+  "private": true,
+  "workspaces": [
+    "packages/core",
+    "packages/react"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sreeharsha/opensource-showcase.git"
+  },
+  "homepage": "https://sreeharsha.github.io/opensource-showcase",
+  "bugs": {
+    "url": "https://github.com/sreeharsha/opensource-showcase/issues"
+  },
+  "author": "sreeharsha1902",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "dev:packages": "npm run dev --workspaces",
+    "build": "npm run build --workspaces && vite build",
+    "build:packages": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces",
+    "preview": "vite preview",
+    "publish-packages": "npm publish -w packages/core && npm publish -w packages/react"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "@vitejs/plugin-react": "^5.1.2",
+    "eslint": "^8.54.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "typescript": "^5.3.3",
+    "vite": "^7.3.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

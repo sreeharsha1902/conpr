@@ -1,0 +1,41 @@
+{
+  "name": "@opensource-showcase/core",
+  "version": "0.1.0",
+  "description": "Core utilities for fetching and processing GitHub contribution data",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sreeharsha/opensource-showcase.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/sreeharsha/opensource-showcase#readme",
+  "bugs": {
+    "url": "https://github.com/sreeharsha/opensource-showcase/issues"
+  },
+  "author": "sreeharsha1902",
+  "license": "MIT",
+  "keywords": ["github", "contributions", "showcase", "typescript"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3"
+  }
+}

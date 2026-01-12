@@ -1,0 +1,48 @@
+{
+  "name": "@opensource-showcase/react",
+  "version": "0.1.0",
+  "description": "React components for displaying open-source contributions",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sreeharsha/opensource-showcase.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/sreeharsha/opensource-showcase#readme",
+  "bugs": {
+    "url": "https://github.com/sreeharsha/opensource-showcase/issues"
+  },
+  "author": "sreeharsha1902",
+  "license": "MIT",
+  "keywords": ["github", "contributions", "react", "showcase", "typescript"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "lint": "eslint src"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "dependencies": {
+    "@opensource-showcase/core": "*"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
