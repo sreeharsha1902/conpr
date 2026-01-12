@@ -1,6 +1,6 @@
 {
   "name": "@openpr/react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React components for displaying open-source contributions",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,7 +10,8 @@
       "import": "./dist/index.js",
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./dist/styles.css": "./dist/styles.css"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,7 @@
   "license": "MIT",
   "keywords": ["github", "contributions", "react", "showcase", "typescript"],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp src/styles.css dist/",
     "dev": "tsc --watch",
     "test": "jest",
     "lint": "eslint src"
@@ -35,7 +36,7 @@
     "react-dom": "^18.0.0"
   },
   "dependencies": {
-    "@openpr/core": "*"
+    "@openpr/core": "^0.1.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

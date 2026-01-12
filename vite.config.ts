@@ -7,15 +7,8 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@conpr/react': path.resolve(__dirname, 'packages/react/src/index.tsx'),
-      '@conpr/core': path.resolve(__dirname, 'packages/core/src/index.ts'),
-      '@openpr/core': path.resolve(__dirname, 'packages/core/src/index.ts'),
       '@openpr/react': path.resolve(__dirname, 'packages/react/src/index.tsx'),
-    },
-  },
-  optimize: {
-    esbuildOptions: {
-      target: 'ES2020',
+      '@openpr/core': path.resolve(__dirname, 'packages/core/src/index.ts'),
     },
   },
   server: {

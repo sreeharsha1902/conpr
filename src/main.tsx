@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
-// Import from published npm package (when available locally via workspaces)
+// Import from monorepo workspace packages
 import { ContributionShowcase } from '@openpr/react';
 import '../packages/react/src/styles.css';
 
