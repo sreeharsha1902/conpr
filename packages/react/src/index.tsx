@@ -26,11 +26,15 @@ export const ContributionShowcase: React.FC<ContributionShowcaseProps> = ({
     const fetchData = async () => {
       try {
         setLoading(true);
+        console.log(`Fetching data for user: ${username}`);
         const data = await getContributionSummary(username, githubToken);
+        console.log('Successfully fetched data:', data);
         setSummary(data);
         setError(null);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch data');
+        const errorMsg = err instanceof Error ? err.message : 'Failed to fetch data';
+        console.error('Error fetching contributions:', err);
+        setError(errorMsg);
       } finally {
         setLoading(false);
       }

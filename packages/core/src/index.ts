@@ -81,8 +81,11 @@ export async function getGitHubUser(username: string, token?: string): Promise<G
       publicRepos: data.public_repos,
       followers: data.followers,
     };
-  } catch (error) {
-    throw new Error(`Failed to fetch GitHub user: ${username}`);
+  } catch (error: any) {
+    const msg = error?.response?.status === 404 
+      ? `GitHub user not found: ${username}`
+      : error?.message || 'Failed to fetch GitHub user';
+    throw new Error(msg);
   }
 }
 
