@@ -5,7 +5,7 @@ import {
   GitHubUser,
   Repository,
   PullRequest,
-} from '../core/src/index';
+} from '@opensource-showcase/core';
 
 interface ContributionShowcaseProps {
   username: string;
