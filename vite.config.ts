@@ -9,8 +9,8 @@ export default defineConfig({
     alias: {
       '@conpr/react': path.resolve(__dirname, 'packages/react/src/index.tsx'),
       '@conpr/core': path.resolve(__dirname, 'packages/core/src/index.ts'),
-      '@sreeharsha1902/core': path.resolve(__dirname, 'packages/core/src/index.ts'),
-      '@sreeharsha1902/react': path.resolve(__dirname, 'packages/react/src/index.tsx'),
+      '@openpr/core': path.resolve(__dirname, 'packages/core/src/index.ts'),
+      '@openpr/react': path.resolve(__dirname, 'packages/react/src/index.tsx'),
     },
   },
   optimize: {

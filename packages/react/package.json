@@ -1,5 +1,5 @@
 {
-  "name": "@sreeharsha1902/react",
+  "name": "@openpr/react",
   "version": "0.1.0",
   "description": "React components for displaying open-source contributions",
   "main": "dist/index.js",
@@ -17,9 +17,9 @@
     "url": "https://github.com/sreeharsha1902/conpr.git",
     "directory": "packages/react"
   },
-  "homepage": "https://github.com/sreeharsha/opensource-showcase#readme",
+  "homepage": "https://github.com/sreeharsha/opensource#readme",
   "bugs": {
-    "url": "https://github.com/sreeharsha/opensource-showcase/issues"
+    "url": "https://github.com/sreeharsha/opensource/issues"
   },
   "author": "sreeharsha1902",
   "license": "MIT",
@@ -35,7 +35,7 @@
     "react-dom": "^18.0.0"
   },
   "dependencies": {
-    "@sreeharsha1902/core": "*"
+    "@openpr/core": "*"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

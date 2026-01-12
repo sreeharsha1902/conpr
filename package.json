@@ -1,5 +1,5 @@
 {
-  "name": "@sreeharsha1902/monorepo",
+  "name": "@opensource/monorepo",
   "version": "0.1.0",
   "description": "TypeScript monorepo for showcasing open-source contributions with React components and Node.js utilities",
   "private": true,
@@ -13,7 +13,7 @@
   },
   "homepage": "https://sreeharsha1902.github.io/conpr",
   "bugs": {
-    "url": "https://github.com/sreeharsha/opensource-showcase/issues"
+    "url": "https://github.com/sreeharsha/opensource/issues"
   },
   "author": "sreeharsha1902",
   "license": "MIT",
@@ -28,8 +28,8 @@
     "publish-packages": "npm publish -w packages/core && npm publish -w packages/react"
   },
   "devDependencies": {
-    "@sreeharsha1902/core": "*",
-    "@sreeharsha1902/react": "*",
+    "@openpr/core": "*",
+    "@openpr/react": "*",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
     "@vitejs/plugin-react": "^5.1.2",
