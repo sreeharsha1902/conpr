@@ -37,7 +37,9 @@ jobs:
         run: npx vite build
 
       - name: Check dist directory
-        run: ls -la dist/
+        run: |
+          echo "Contents of dist directory:"
+          ls -laR dist/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
