@@ -106,7 +106,7 @@ export async function getUserRepositories(username: string, token?: string): Pro
       language: repo.language || 'Unknown',
       stars: repo.stargazers_count,
       forks: repo.forks_count,
-      topics: repo.topics || [],
+      topics: (repo.topics || []) as string[],
     }));
   } catch (error) {
     throw new Error(`Failed to fetch repositories for user: ${username}`);
@@ -130,7 +130,7 @@ export async function getUserPullRequests(
     );
     
     return response.data.map((pr: any) => {
-      const stateMap: { open: string; closed: string; merged: string } = {
+      const stateMap: Record<string, 'open' | 'closed' | 'merged'> = {
         open: 'open',
         closed: pr.pull_request?.merged_at ? 'merged' : 'closed',
         merged: 'merged',
@@ -140,7 +140,7 @@ export async function getUserPullRequests(
         title: pr.title,
         number: pr.number,
         url: pr.html_url,
-        state: stateMap[pr.state as keyof typeof stateMap] || pr.state,
+        state: stateMap[pr.state] || ('closed' as const),
         createdAt: pr.created_at,
         mergedAt: pr.pull_request?.merged_at,
         repository: {
