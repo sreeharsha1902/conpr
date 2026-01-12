@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
-// Import directly from source for Vite development
-import { ContributionShowcase } from '../packages/react/src/index';
+// Import from packages source (Vite will compile)
+import { ContributionShowcase } from '../packages/react/src';
 import '../packages/react/src/styles.css';
 
 function App() {

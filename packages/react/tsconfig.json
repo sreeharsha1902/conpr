@@ -9,13 +9,13 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "moduleResolution": "node"
   },
-  "include": ["src"],
+  "include": ["src", "../core/src"],
   "exclude": ["node_modules", "dist"]
 }

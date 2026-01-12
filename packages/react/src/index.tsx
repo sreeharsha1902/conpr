@@ -5,7 +5,7 @@ import {
   GitHubUser,
   Repository,
   PullRequest,
-} from '@opensource-showcase/core';
+} from '../core/src/index';
 
 interface ContributionShowcaseProps {
   username: string;
@@ -159,7 +159,7 @@ const PullRequestCard: React.FC<PullRequestCardProps> = ({ pullRequest }) => {
         <h3>{pullRequest.title}</h3>
         <span
           className="pr-state"
-          style={{ backgroundColor: stateColor[pullRequest.state] }}
+          style={{ backgroundColor: stateColor[pullRequest.state as keyof typeof stateColor] }}
         >
           {pullRequest.state}
         </span>
@@ -191,7 +191,7 @@ const RepositoryCard: React.FC<RepositoryCardProps> = ({ repository }) => {
       </div>
       {repository.topics.length > 0 && (
         <div className="repo-topics">
-          {repository.topics.slice(0, 3).map((topic) => (
+          {repository.topics.slice(0, 3).map((topic: string) => (
             <span key={topic} className="topic-badge">
               {topic}
             </span>

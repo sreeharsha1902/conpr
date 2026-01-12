@@ -55,7 +55,7 @@ async function getUserRepositories(username, token) {
             language: repo.language || 'Unknown',
             stars: repo.stargazers_count,
             forks: repo.forks_count,
-            topics: repo.topics || [],
+            topics: (repo.topics || []),
         }));
     }
     catch (error) {
@@ -81,7 +81,7 @@ async function getUserPullRequests(username, token) {
                 title: pr.title,
                 number: pr.number,
                 url: pr.html_url,
-                state: stateMap[pr.state] || pr.state,
+                state: stateMap[pr.state] || 'closed',
                 createdAt: pr.created_at,
                 mergedAt: pr.pull_request?.merged_at,
                 repository: {
