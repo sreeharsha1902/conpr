@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { ContributionShowcase } from '@openpr/react';
+import '../packages/react/src/styles.css';
 
-// Simple app component
-const App: React.FC = () => {
-  const [username, setUsername] = React.useState('sreeharsha1902');
-  const [inputValue, setInputValue] = React.useState('sreeharsha1902');
-  const [token, setToken] = React.useState('');
+function App() {
+  const [username, setUsername] = useState('sreeharsha1902');
+  const [inputValue, setInputValue] = useState('sreeharsha1902');
+  const [token, setToken] = useState('');
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +36,7 @@ const App: React.FC = () => {
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Enter GitHub username (e.g., sreeharsha1902, octocat)..."
+              placeholder="Enter GitHub username (e.g., sreeharsha1902)..."
               style={{
                 padding: '0.75rem 1rem',
                 fontSize: '1rem',
@@ -58,14 +58,7 @@ const App: React.FC = () => {
                 borderRadius: '6px',
                 cursor: 'pointer',
                 fontWeight: '600',
-                transition: 'background 0.2s',
               }}
-              onMouseEnter={(e) =>
-                ((e.target as HTMLButtonElement).style.backgroundColor = '#0256c7')
-              }
-              onMouseLeave={(e) =>
-                ((e.target as HTMLButtonElement).style.backgroundColor = '#0366d6')
-              }
             >
               Search
             </button>
@@ -76,7 +69,7 @@ const App: React.FC = () => {
               type="password"
               value={token}
               onChange={(e) => setToken(e.target.value)}
-              placeholder="GitHub Token (optional for higher rate limits)"
+              placeholder="GitHub Token (optional)"
               style={{
                 padding: '0.5rem 0.75rem',
                 fontSize: '0.9rem',
@@ -86,12 +79,6 @@ const App: React.FC = () => {
                 borderRadius: '6px',
               }}
             />
-            <p style={{ marginTop: '0.5rem', fontSize: '0.85rem' }}>
-              Get a token at{' '}
-              <a href="https://github.com/settings/tokens" target="_blank" rel="noopener noreferrer">
-                github.com/settings/tokens
-              </a>
-            </p>
           </div>
         </form>
       </header>
@@ -110,18 +97,15 @@ const App: React.FC = () => {
         }}
       >
         <p>
-          Made with ❤️ By <a href="https://github.com/sreeharsha1902" target="_blank" rel="noopener noreferrer">sreeharsha1902</a> • Try username: <code>sreeharsha1902</code>
+          Made with ❤️ By <a href="https://github.com/sreeharsha1902">sreeharsha1902</a>
         </p>
       </footer>
     </div>
   );
-};
-
-// Mount the app
-const root = document.getElementById('root');
-if (!root) {
-  throw new Error('Root element not found');
 }
+
+const root = document.getElementById('root');
+if (!root) throw new Error('Root element not found');
 
 ReactDOM.createRoot(root).render(
   <React.StrictMode>

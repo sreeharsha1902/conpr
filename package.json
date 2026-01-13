@@ -28,8 +28,8 @@
     "publish-packages": "npm publish -w packages/core && npm publish -w packages/react"
   },
   "devDependencies": {
-    "@openpr/core": "*",
-    "@openpr/react": "*",
+    "@openpr/core": "^0.1.1",
+    "@openpr/react": "^0.1.1",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
     "@vitejs/plugin-react": "^5.1.2",
