@@ -11,6 +11,15 @@ export default defineConfig({
       '@openpr/core': path.resolve(__dirname, 'packages/core/src/index.ts'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom'],
+        },
+      },
+    },
+  },
   server: {
     port: 3000,
     open: true,
