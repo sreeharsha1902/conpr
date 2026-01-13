@@ -1,114 +1,119 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom/client';
-import { ContributionShowcase } from '@openpr/react';
+import { getContributionSummary } from '@openpr/core';
 import '../packages/react/src/styles.css';
 
-function App() {
-  const [username, setUsername] = useState('sreeharsha1902');
-  const [inputValue, setInputValue] = useState('sreeharsha1902');
-  const [token, setToken] = useState('');
+let currentUsername = 'sreeharsha1902';
+let currentToken = '';
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (inputValue.trim()) {
-      setUsername(inputValue.trim());
-    }
-  };
+async function loadUserData(username: string, token: string) {
+  const container = document.getElementById('contributions');
+  if (!container) return;
 
-  return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#f6f8fa' }}>
-      <header
-        style={{
-          padding: '2rem',
-          textAlign: 'center',
-          borderBottom: '1px solid #e1e4e8',
-          backgroundColor: '#ffffff',
-        }}
-      >
-        <h1>🚀 OpenSource Showcase</h1>
-        <p style={{ color: '#666', marginTop: '0.5rem' }}>
-          Discover and showcase your open-source contributions
-        </p>
+  container.innerHTML = '<div class="showcase-loading">Loading contributions...</div>';
 
-        <form onSubmit={handleSearch} style={{ marginTop: '2rem' }}>
-          <div style={{ marginBottom: '1rem' }}>
-            <input
-              type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Enter GitHub username (e.g., sreeharsha1902)..."
-              style={{
-                padding: '0.75rem 1rem',
-                fontSize: '1rem',
-                width: '300px',
-                maxWidth: '100%',
-                border: '1px solid #ddd',
-                borderRadius: '6px',
-                marginRight: '0.5rem',
-              }}
-            />
-            <button
-              type="submit"
-              style={{
-                padding: '0.75rem 1.5rem',
-                fontSize: '1rem',
-                backgroundColor: '#0366d6',
-                color: 'white',
-                border: 'none',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                fontWeight: '600',
-              }}
-            >
-              Search
-            </button>
+  try {
+    console.log(`Fetching data for user: ${username}`);
+    const data = await getContributionSummary(username, token || undefined);
+    console.log('Successfully fetched data:', data);
+
+    container.innerHTML = `
+      <div class="showcase-container theme-light">
+        <!-- User Profile -->
+        <div class="user-profile">
+          <img src="${data.user.avatarUrl}" alt="${data.user.login}" class="user-avatar" />
+          <div class="user-info">
+            <h1>${data.user.name}</h1>
+            <p class="user-login">@${data.user.login}</p>
+            ${data.user.bio ? `<p class="user-bio">${data.user.bio}</p>` : ''}
+            <div class="user-stats">
+              <span>${data.user.publicRepos} Public Repos</span>
+              <span>${data.user.followers} Followers</span>
+            </div>
+            <a href="${data.user.profileUrl}" target="_blank" rel="noopener noreferrer" class="profile-link">View on GitHub</a>
           </div>
+        </div>
 
-          <div style={{ marginTop: '1rem', fontSize: '0.9rem', color: '#666' }}>
-            <input
-              type="password"
-              value={token}
-              onChange={(e) => setToken(e.target.value)}
-              placeholder="GitHub Token (optional)"
-              style={{
-                padding: '0.5rem 0.75rem',
-                fontSize: '0.9rem',
-                width: '300px',
-                maxWidth: '100%',
-                border: '1px solid #ddd',
-                borderRadius: '6px',
-              }}
-            />
+        <!-- Stats -->
+        <div class="contribution-stats">
+          <h2>Contributions</h2>
+          <div class="stats-cards">
+            <div class="stat-card">
+              <p class="stat-value">${data.totalContributions}</p>
+              <p class="stat-label">Total Contributions</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-value">${data.pullRequests.length}</p>
+              <p class="stat-label">Pull Requests</p>
+            </div>
           </div>
-        </form>
-      </header>
+        </div>
 
-      <main style={{ padding: '2rem' }}>
-        <ContributionShowcase username={username} githubToken={token || undefined} theme="light" />
-      </main>
+        <!-- Pull Requests -->
+        <div class="pull-requests">
+          <h2>Recent Pull Requests</h2>
+          <div class="pr-list">
+            ${data.pullRequests.slice(0, 10).map(pr => {
+              const colors: { [key: string]: string } = { open: '#238636', closed: '#da3633', merged: '#8957e5' };
+              return `
+                <a href="${pr.url}" target="_blank" rel="noopener noreferrer" class="pr-card">
+                  <div class="pr-header">
+                    <h3>${pr.title}</h3>
+                    <span class="pr-state" style="background-color: ${colors[pr.state] || '#666'}">${pr.state}</span>
+                  </div>
+                  <p class="pr-meta">${pr.repository.owner}/${pr.repository.name} #${pr.number}</p>
+                  <p class="pr-date">${new Date(pr.createdAt).toLocaleDateString()}</p>
+                </a>
+              `;
+            }).join('')}
+          </div>
+        </div>
 
-      <footer
-        style={{
-          textAlign: 'center',
-          padding: '2rem',
-          color: '#666',
-          borderTop: '1px solid #e1e4e8',
-          marginTop: '2rem',
-        }}
-      >
-        <p>
-          Made with ❤️ By <a href="https://github.com/sreeharsha1902">sreeharsha1902</a>
-        </p>
-      </footer>
-    </div>
-  );
+        <!-- Repositories -->
+        <div class="repositories">
+          <h2>Top Repositories</h2>
+          <div class="repositories-grid">
+            ${data.repositories.slice(0, 12).map(repo => `
+              <a href="${repo.url}" target="_blank" rel="noopener noreferrer" class="repo-card">
+                <h3>${repo.name}</h3>
+                <p class="repo-description">${repo.description}</p>
+                <div class="repo-meta">
+                  <span class="repo-language">${repo.language}</span>
+                  <span class="repo-stats">⭐ ${repo.stars} | 🍴 ${repo.forks}</span>
+                </div>
+                ${repo.topics.length > 0 ? `
+                  <div class="repo-topics">
+                    ${repo.topics.slice(0, 3).map(topic => `<span class="topic-badge">${topic}</span>`).join('')}
+                  </div>
+                ` : ''}
+              </a>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Failed to fetch data';
+    console.error('Error:', error);
+    container.innerHTML = `<div class="showcase-error">Error: ${message}</div>`;
+  }
 }
 
-const root = document.getElementById('root');
-if (!root) throw new Error('Root element not found');
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+  const searchForm = document.getElementById('search-form') as HTMLFormElement;
+  const usernameInput = document.getElementById('username') as HTMLInputElement;
+  const tokenInput = document.getElementById('token') as HTMLInputElement;
 
-ReactDOM.createRoot(root).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+  if (searchForm) {
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (usernameInput.value.trim()) {
+        currentUsername = usernameInput.value.trim();
+        currentToken = tokenInput.value;
+        loadUserData(currentUsername, currentToken);
+      }
+    });
+  }
+
+  // Load initial user
+  loadUserData(currentUsername, currentToken);
+});

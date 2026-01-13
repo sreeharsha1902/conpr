@@ -3,25 +3,53 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OpenSource Showcase - Test</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-        background: #f6f8fa;
-      }
-      #root {
-        min-height: 100vh;
-      }
-    </style>
+    <title>OpenSource Showcase</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div style="min-height: 100vh; background-color: #f6f8fa;">
+      <header style="padding: 2rem; text-align: center; border-bottom: 1px solid #e1e4e8; background-color: #ffffff;">
+        <h1>🚀 OpenSource Showcase</h1>
+        <p style="color: #666; margin-top: 0.5rem;">Discover and showcase your open-source contributions</p>
+
+        <form id="search-form" style="margin-top: 2rem;">
+          <div style="margin-bottom: 1rem;">
+            <input
+              type="text"
+              id="username"
+              value="sreeharsha1902"
+              placeholder="Enter GitHub username..."
+              style="padding: 0.75rem 1rem; font-size: 1rem; width: 300px; max-width: 100%; border: 1px solid #ddd; border-radius: 6px; margin-right: 0.5rem;"
+            />
+            <button
+              type="submit"
+              style="padding: 0.75rem 1.5rem; font-size: 1rem; background-color: #0366d6; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;"
+            >
+              Search
+            </button>
+          </div>
+
+          <div style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+            <input
+              type="password"
+              id="token"
+              placeholder="GitHub Token (optional)"
+              style="padding: 0.5rem 0.75rem; font-size: 0.9rem; width: 300px; max-width: 100%; border: 1px solid #ddd; border-radius: 6px;"
+            />
+          </div>
+        </form>
+      </header>
+
+      <main style="padding: 2rem;">
+        <div id="contributions"></div>
+      </main>
+
+      <footer style="text-align: center; padding: 2rem; color: #666; border-top: 1px solid #e1e4e8; margin-top: 2rem;">
+        <p>
+          Made with ❤️ By <a href="https://github.com/sreeharsha1902">sreeharsha1902</a>
+        </p>
+      </footer>
+    </div>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
